@@ -14,6 +14,7 @@ class Instruction:
         # TODO: find out jump address
         # self.jumpAddress = registers[REGISTERS[self.high8 & 0b11]]
         self.jumpOffset = (instruction >> 4)
+        self.instruction = instruction
 
     def __init__(self, instruction:int) -> None:
         self.split_instruction(instruction)
@@ -38,6 +39,30 @@ class Instruction:
         elif self.namedOpcode == "STA":
             res.append(REGISTERS[self.rd])
             res.append("MEM_"+hex(self.high10))
+        elif self.namedOpcode == "JMR":
+            res.append(REGISTERS[self.rd])
+        
+        elif self.namedOpcode == "MVR":
+            # TODO: figure WTF it's doing
+            res.append(REGISTERS[self.rd])
+            res.append(REGISTERS[self.rs])
+            res.append("OFF_"+hex(self.high8))
+        elif self.namedOpcode == "MVV":
+            if self.high10 & 3 == 0:
+                res = ["MVI", REGISTERS[self.rd], hex(self.high8)]
+            elif self.high10 & 3 == 1:
+                res = ["ADI", REGISTERS[self.rd], hex((self.high8 << 24) >> 24)]
+            elif self.high10 & 3 == 2:
+                res = ["MUI", REGISTERS[self.rd], hex(self.high8)]
+            elif self.high10 & 3 == 3:
+                res = ["AUI", REGISTERS[self.rd], hex(self.high8)]
+        elif self.namedOpcode == "PSH":
+            res.append(REGISTERS[self.rs])
+        elif self.namedOpcode == "POP":
+            res.append(REGISTERS[self.rd])
+        elif self.namedOpcode == "NOA":
+            noa_op = (self.instruction & 0xF0) >> 4
+            res = [ NOA[noa_op] ]
         else:
             res.append("TBD")
         return " ".join(res)

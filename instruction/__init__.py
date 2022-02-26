@@ -28,12 +28,12 @@ OPERATION_SHIFT = 8,
 ARITHMETIC_MODE_SHIFT = 12
 BITWISE_SHIFT_SHIFT = 13
 
-NOA = {
-    "NOP": 0,
-    "RET": 1,
-    "SYS": 2,
-    "HLT": 3
-}
+NOA = [
+    "NOP",
+    "RET",
+    "SYS",
+    "HLT"
+]
 
 JUMP = {
     "EQ": 0,
