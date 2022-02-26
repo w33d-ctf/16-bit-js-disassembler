@@ -1,14 +1,15 @@
 from . import *
 
+
 class Instruction:
-    def split_instruction(self, instruction:int):
+    def split_instruction(self, instruction: int):
         opcode = (instruction & 0b0000000000001111)
         self.rd = (instruction & 0b0000000000110000) >> DESTINATION_SHIFT
         self.rs = (instruction & 0b0000000011000000) >> SOURCE_SHIFT
         self.high8 = (instruction & 0b1111111100000000) >> ADDRESS_SHIFT
         self.high10 = (instruction & 0b1111111111000000) >> LONG_ADDRESS_SHIFT
 
-        print(hex(self.high10))
+        # print(hex(self.high10))
         #print(f"op code:{opcode}")
         self.namedOpcode = INSTRUCTION_MAP[opcode]
         # TODO: find out jump address
@@ -16,26 +17,26 @@ class Instruction:
         self.jumpOffset = (instruction >> 4)
         self.instruction = instruction
 
-    def __init__(self, instruction:int) -> None:
+    def __init__(self, instruction: int) -> None:
         self.split_instruction(instruction)
-    
+
     def __str__(self) -> str:
-        res = [ self.namedOpcode ]
+        res = [self.namedOpcode]
         if self.namedOpcode == "CAL":
-            res.append("REG_"+str(REGISTERS[self.rd]))
-        
+            res.append("REG_" + str(REGISTERS[self.rd]))
+
         elif self.namedOpcode == "LDR":
             res.append(REGISTERS[self.rd])
             res.append(REGISTERS[self.rs])
-            res.append("OFF_"+hex(self.high8))
+            res.append("OFF_" + hex(self.high8))
         elif self.namedOpcode == "LDA":
             res.append(REGISTERS[self.rd])
-            res.append("MEM_"+hex(self.high10))
+            res.append("MEM_" + hex(self.high10))
 
         elif self.namedOpcode == "STR":
             res.append(REGISTERS[self.rd])
             res.append(REGISTERS[self.rs])
-            res.append("OFF_"+hex(self.high8))
+            res.append("OFF_" + hex(self.high8))
         elif self.namedOpcode == "STA":
             res.append(REGISTERS[self.rd])
             res.append("MEM_"+hex(self.high10))

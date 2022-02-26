@@ -9,8 +9,9 @@ with open(sys.argv[1], 'rb') as f:
         if instruction == "":
             break
         try:
-            print("{:02x} {}".format(inc, Instruction(
+            print("{:04x}\t{:04x}\t\t{}".format(inc, int.from_bytes(instruction, byteorder='little'), Instruction(
                 int.from_bytes(instruction, byteorder='little'))))
         except IndexError:
-            print("{:02x} {}".format(inc, instruction))
+            pass
+            #print("{:02x} {}".format(inc, instruction))
         inc += 2
