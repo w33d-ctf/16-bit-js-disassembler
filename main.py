@@ -14,4 +14,3 @@ with open(sys.argv[1], 'rb') as f:
         except IndexError:
             print("{:02x} {}".format(inc, instruction))
         inc += 2
-print(Instruction(0b0000111100001011))
