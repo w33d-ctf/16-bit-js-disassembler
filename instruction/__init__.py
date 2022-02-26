@@ -52,21 +52,25 @@ JUMP = {
 }
 
 ARITHMETIC = {
-    "ADD": 0,
-    "SUB": 1,
-    "MUL": 2,
-    "DIV": 3,
-    "INC": 4,
-    "DEC": 5,
-    "LSF": 6,
-    "RSF": 7,
-    "AND": 8,
-    "OR": 9,
-    "XOR": 10,
-    "NOT": 11,
-    "DESTINATION_MODE": 0,
-    "SOURCE_MODE": 1
+0:"ADD",
+1:"SUB",
+2:"MUL",
+3:"DIV",
+4:"INC",
+5:"DEC",
+6:"LSF",
+7:"RSF",
+8:"AND",
+9:"OR",
+10:"XOR",
+11:"NOT",
+# see ATH parse for these marcos 
+# 0:"DESTINATION_MODE",
+# 1:"SOURCE_MODE",
 }
+DESTINATION_MODE = 0
+SOURCE_MODE = 1
+
 
 OS = {
     "STDOUT": 0,
