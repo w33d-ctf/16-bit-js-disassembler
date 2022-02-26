@@ -36,19 +36,19 @@ NOA = [
 ]
 
 JUMP = {
-    "EQ": 0,
-    "NEQ": 1,
-    "LT": 2,
-    "GT": 3,
-    "LTE": 4,
-    "GTE": 5,
-    "ZER": 6,
-    "NZE": 7,
-
-    "R1": 4,
-    "R2": 6,
-    "AR": 8,
-    "OP": 10
+    0:"EQ", 
+    1:"NEQ",
+    2:"LT", 
+    3:"GT", 
+    4:"LTE",
+    5:"GTE",
+    6:"ZER",
+    7:"NZE",
+# WARN: i haven't figure out what these mean below, please use them carefully 
+# 4:"R1", 
+# 6:"R2", 
+# 8:"AR",
+# 10:"OP",
 }
 
 ARITHMETIC = {

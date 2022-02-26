@@ -12,8 +12,9 @@ class Instruction:
         # print(hex(self.high10))
         #print(f"op code:{opcode}")
         self.namedOpcode = INSTRUCTION_MAP[opcode]
-        # TODO: find out jump address
-        # self.jumpAddress = registers[REGISTERS[self.high8 & 0b11]]
+        
+        # jump address is retrieve from registers
+        self.jumpAddress = REGISTERS[self.high8 & 0b11]
         self.jumpOffset = (instruction >> 4)
         self.instruction = instruction
 
@@ -24,7 +25,7 @@ class Instruction:
     def __str__(self) -> str:
         res = [self.namedOpcode]
         if self.namedOpcode == "CAL":
-            res.append("REG_" + str(REGISTERS[self.rd]))
+            res.append(REGISTERS[self.rd])
 
         elif self.namedOpcode == "LDR":
             res.append(REGISTERS[self.rd])
@@ -65,6 +66,8 @@ class Instruction:
         elif self.namedOpcode == "NOA":
             noa_op = (self.instruction & 0xF0) >> 4
             res = [ NOA[noa_op] ]
+        elif self.namedOpcode == "JCP":
+            res = [ "J"+JUMP[self.high8 >> 2] , REGISTERS[self.rd], REGISTERS[self.rs], self.jumpAddress]
         else:
             res.append("TBD")
         return " ".join(res)
