@@ -18,6 +18,7 @@ class Instruction:
         self.instruction = instruction
 
     def __init__(self, instruction: int) -> None:
+        # print(f"constructor receive:{hex(instruction)}")
         self.split_instruction(instruction)
 
     def __str__(self) -> str:
@@ -67,3 +68,5 @@ class Instruction:
         else:
             res.append("TBD")
         return " ".join(res)
+    def pprint(self)->str:
+        return "{:<20} {}".format(str(self), hex(self.instruction)[2:].zfill(4))
