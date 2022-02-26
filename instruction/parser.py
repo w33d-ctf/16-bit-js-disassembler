@@ -8,7 +8,8 @@ class Instruction:
         self.high8 = (instruction & 0b1111111100000000) >> ADDRESS_SHIFT
         self.high10 = (instruction & 0b1111111111000000) >> LONG_ADDRESS_SHIFT
 
-        print(f"op code:{opcode}")
+        print(hex(self.high10))
+        #print(f"op code:{opcode}")
         self.namedOpcode = INSTRUCTION_MAP[opcode]
         # TODO: find out jump address
         # self.jumpAddress = registers[REGISTERS[self.high8 & 0b11]]
