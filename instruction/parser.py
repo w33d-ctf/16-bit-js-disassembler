@@ -18,4 +18,25 @@ class Instruction:
         self.split_instruction(instruction)
     
     def __str__(self) -> str:
-        return self.namedOpcode + " TBD"
+        res = [ self.namedOpcode ]
+        if self.namedOpcode == "CAL":
+            res.append("REG_"+str(REGISTERS[self.rd]))
+        
+        elif self.namedOpcode == "LDR":
+            res.append(REGISTERS[self.rd])
+            res.append(REGISTERS[self.rs])
+            res.append("OFF_"+hex(self.high8))
+        elif self.namedOpcode == "LDA":
+            res.append(REGISTERS[self.rd])
+            res.append("MEM_"+hex(self.high10))
+
+        elif self.namedOpcode == "STR":
+            res.append(REGISTERS[self.rd])
+            res.append(REGISTERS[self.rs])
+            res.append("OFF_"+hex(self.high8))
+        elif self.namedOpcode == "STA":
+            res.append(REGISTERS[self.rd])
+            res.append("MEM_"+hex(self.high10))
+        else:
+            res.append("TBD")
+        return " ".join(res)
