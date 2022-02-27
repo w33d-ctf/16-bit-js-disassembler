@@ -1,0 +1,59 @@
+0001; XREF 0x2
+0004; XREF 0x4b
+0096; XREF 0x4f
+0057; JGTE MEM[0x11c], MEM[0x11b], 0x97
+005e; printf("%s", "flag[")
+0066; printf("%d", MEM[0x11c])
+006d; printf("%s", "]: ")
+0072; B = getc()
+0075; A = copy of input
+0078; nop?
+0085; printf("%c", B)
+007f; MEM[MEM[0x11c] + 0x155] = A
+008c; putc('\n')
+009b; end of read input
+000d; JGTE MEM[0x11e], MEM[0x11f], 0x1b
+0010; xref 0x9c
+00cd; xref 0xa5
+00ad; xref 0xce
+00d2; end of func
+0013; xref 0xd3
+0043; success
+003b; failed
+0033; xref 0x3b goto failed
+0028; xref 0x43 goto correct
+001a; LOOP at 0x5
+00a4; MEM[0x11d] = 0
+00a5; LOOP_START:
+00db; MEM[0x11d] = 0
+00e4; JGTE MEM[0x11d] MEM[0x11b] 0x116
+0115; LOOP at 0xdc
+00de; C = local loop ctr
+00e7; A = local loop ctr
+00ea; orignally 0
+00eb; A = local loop ctr + global loop ctr
+00ee; A = local loop ctr + global loop ctr + 0xb
+00ef; D = local loop ctr + global loop ctr + 0xb
+00f3; A = (local loop ctr + global loop ctr + 0xb) // len of str
+00f7; A = (local loop ctr + global loop ctr + 0xb) // len of str * len of str
+00f8; D = (local loop ctr + global loop ctr + 0xb) % len of str
+00fc; A = MEM[0x18a + (local loop ctr + global loop ctr + 0xb) % len of str ] 
+0101; D = local loop ctr
+0103; B = MEM[input off + local loop ctr]
+0104; A = MEM[0x18a + (local loop ctr + global loop ctr + 0xb) % len of str ] + MEM[input off + local loop ctr]
+0107; A = (MEM[0x18a + (local loop ctr + global loop ctr + 0xb) % len of str ] + MEM[input off + local loop ctr]) & 0xFF
+010e; (MEM[input off + local loop ctr] += (MEM[0x18a + (local loop ctr + global loop ctr + 0xb) % len of str ])) & 0xFF
+00a1; MEM[0x11d] = local loop ctr
+00a7; C = local loop ctr
+00b1; A = MEM[input off + local loop ctr]
+00b2; B = MEM[input off + local loop ctr]
+00b6; D = MEM[0x120 + local loop ctr]
+00ba; D = MEM[input off + MEM[0x120 + local loop ctr]]
+00be; MEM[input off + local loop ctr] = MEM[input off + MEM[0x120 + local loop ctr]]
+00c2; D =  MEM[0x120 + local loop ctr]
+00c6; MEM[input off + MEM[0x120 + local loop ctr]] = MEM[input off + local loop ctr]
+001f; MEM[0x11d] = 0
+0022; C = local loop ctr
+0025; A = len of str
+002c; A = MEM[0x1bf + local loop ctr]
+0030; B = MEM[input off + local loop ctr]

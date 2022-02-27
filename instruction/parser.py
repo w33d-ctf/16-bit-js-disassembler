@@ -53,6 +53,8 @@ class Instruction:
                 res = [ "MOV", REGISTERS[self.rd], REGISTERS[self.rs]]
             elif (self.high8 == 0xFF) and (self.rs == self.rd):
                 res = [ "DEC", REGISTERS[self.rd] ]
+            elif (self.high8 == 0x1) and (self.rs == self.rd):
+                res = [ "INC", REGISTERS[self.rd] ]
             else:
                 res.append(REGISTERS[self.rd])
                 res.append(REGISTERS[self.rs])
